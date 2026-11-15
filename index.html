@@ -136,7 +136,9 @@ section{position:relative}
 .sel{appearance:none;-webkit-appearance:none;background:transparent;border:1px solid var(--line2);border-radius:99px;color:var(--fg);padding:9px 34px 9px 16px;font:500 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23c8a46a' stroke-width='1.3'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:10px}
 .sel option{background:#151210}
 .count{font-size:12px;color:var(--dim);letter-spacing:.1em}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:22px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+@media (max-width:960px){.grid{grid-template-columns:repeat(2,1fr);gap:18px}}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
 .card{position:relative;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--card);transition:transform .5s var(--ease),border-color .4s;cursor:pointer;animation:cin .7s var(--ease) both}
 @keyframes cin{from{opacity:0;transform:translateY(24px)}}
 .card:hover{transform:translateY(-6px);border-color:var(--line2)}
@@ -1037,7 +1039,7 @@ requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add(
  vec2 iuv=suv*uScale+uOff-normal.xy*.11*(1.2-nv)+(suv-vec2(.5))*-.02;
  vec3 bg;
  if(uUseBg>.5) bg=texture2D(uBg,clamp(iuv,.001,.999)).rgb*1.35;
- else bg=mix(vec3(.07,.035,.016),vec3(.5,.36,.22),smoothstep(.47,.36,iuv.y))*1.3;
+ else bg=mix(vec3(.11,.06,.03),vec3(.26,.18,.11),smoothstep(.47,.3,iuv.y))*1.3+cc*.07;   // studio shot: soft wall/table, never a white hole
  vec3 tr=bg*Tr+cc*(.004+.1*hot*nv);
  float lines=exp(-pow((abs(vLP.x)-.5)/.016,2.))*smoothstep(-.55,.2,vLP.y)+.5*exp(-pow((vLP.x+.28)/.009,2.))*smoothstep(-.3,.4,vLP.y);
  tr+=mix(cc,vec3(1.,.9,.7),.5)*lines*.2;                          // strip lights seen on the back wall of the glass
